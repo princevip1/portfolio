@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Prose } from "@/components/Prose";
+import ReadingProgress from "@/components/ReadingProgress";
 import { getAdjacentPosts, getPostBySlug, posts } from "@/lib/writing";
 
 type Params = Promise<{ slug: string }>;
@@ -45,6 +46,7 @@ export default async function PostPage({ params }: { params: Params }) {
 
   return (
     <article className="pt-32 md:pt-40 pb-24 lg:pb-32">
+      <ReadingProgress />
       <div className="max-w-6xl mx-auto px-6 lg:px-10">
         <Link
           href="/writing"

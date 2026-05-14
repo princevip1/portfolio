@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Rss } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";
 import { posts } from "@/lib/writing";
 
@@ -22,11 +22,22 @@ export default function WritingPage() {
               <br className="hidden md:block" /> the build.
             </h1>
           </div>
-          <p className="lg:col-span-5 text-base leading-relaxed text-foreground/80 max-w-xl lg:pt-3">
-            Occasional writing on payments, real-time systems, multi-tenant
-            data, and the rest of full-stack life. Published when there&apos;s
-            something worth saying — not for streak counts.
-          </p>
+          <div className="lg:col-span-5 lg:pt-3">
+            <p className="text-base leading-relaxed text-foreground/80 max-w-xl">
+              Occasional writing on payments, real-time systems, multi-tenant
+              data, and the rest of full-stack life. Published when there&apos;s
+              something worth saying — not for streak counts.
+            </p>
+            <a
+              href="/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-foreground transition-colors"
+            >
+              <Rss size={13} strokeWidth={1.5} />
+              <span className="link-underline">Subscribe via RSS</span>
+            </a>
+          </div>
         </header>
 
         <div className="border-t border-border">

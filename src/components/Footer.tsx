@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUp, Rss } from "lucide-react";
 
 const sitemap = [
   { label: "Work", href: "/work" },
@@ -88,6 +88,17 @@ export default function Footer() {
                 >
                   <Linkedin size={14} strokeWidth={1.5} />
                   linkedin.com/in/devprincemahmud
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/rss.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 text-sm text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  <Rss size={14} strokeWidth={1.5} />
+                  RSS feed
                 </a>
               </li>
             </ul>

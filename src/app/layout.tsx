@@ -80,13 +80,25 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Prince Mahmud — Writing"
+          href="/rss.xml"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground`}
       >
         <ThemeProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-foreground focus:text-background focus:px-4 focus:py-2 focus:rounded-full focus:text-sm focus:font-medium"
+          >
+            Skip to content
+          </a>
           <Navbar />
-          <main>{children}</main>
+          <main id="main">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

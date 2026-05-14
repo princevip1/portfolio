@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import ReadingProgress from "@/components/ReadingProgress";
 import { getAdjacent, getProjectBySlug, projects } from "@/lib/work";
 
 type Params = Promise<{ slug: string }>;
@@ -52,6 +53,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
   return (
     <article className="pt-32 md:pt-40 pb-24 lg:pb-32">
+      <ReadingProgress />
       <div className="max-w-6xl mx-auto px-6 lg:px-10">
         <Link
           href="/work"
