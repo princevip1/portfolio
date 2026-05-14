@@ -1,57 +1,45 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Code2,
-  CreditCard,
-  Globe,
-  Layers,
-  Mail,
-  Zap,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const services = [
   {
-    icon: <Code2 size={24} />,
-    title: "Full-Stack Web App Development",
-    description:
-      "End-to-end development of modern web applications with React, Next.js, and Node.js — from concept to deployment.",
-    gradient: "from-blue-600 to-indigo-600",
+    n: "01",
+    title: "Full-stack web applications",
+    desc: "End-to-end product builds in React, Next.js, and Node.js — from data model and API design through deployment, observability, and handoff.",
+    tags: ["Next.js", "Node.js", "TypeScript"],
   },
   {
-    icon: <Layers size={24} />,
-    title: "SaaS & Subscription Systems",
-    description:
-      "Custom SaaS platforms with multi-tenant architecture, subscription billing, and user management.",
-    gradient: "from-blue-600 to-indigo-600",
+    n: "02",
+    title: "SaaS & subscription systems",
+    desc: "Multi-tenant architecture, subscription billing, role-based access, and the admin surfaces a growing business actually needs to run itself.",
+    tags: ["Multi-tenant", "Billing", "Auth"],
   },
   {
-    icon: <CreditCard size={24} />,
-    title: "Payment Gateway Integration",
-    description:
-      "Seamless integration of Stripe, PayPal, and local payment gateways with secure transaction handling.",
-    gradient: "from-blue-600 to-indigo-600",
+    n: "03",
+    title: "Payment gateway integration",
+    desc: "Stripe, PayPal, and regional gateways done carefully — idempotent webhooks, reconciliation, and edge cases that surface only after launch.",
+    tags: ["Stripe", "Webhooks", "Reconciliation"],
   },
   {
-    icon: <Globe size={24} />,
-    title: "Custom API Development",
-    description:
-      "RESTful and GraphQL API design and development with authentication, rate limiting, and documentation.",
-    gradient: "from-blue-600 to-indigo-600",
+    n: "04",
+    title: "Custom API development",
+    desc: "REST and GraphQL APIs designed for the long haul — versioned, rate-limited, well-documented, and shaped to the domain rather than the framework.",
+    tags: ["REST", "GraphQL", "OpenAPI"],
   },
   {
-    icon: <Zap size={24} />,
-    title: "Real-Time Applications",
-    description:
-      "WebSocket-powered apps for live chat, video conferencing, notifications, and collaborative tools.",
-    gradient: "from-blue-600 to-indigo-600",
+    n: "05",
+    title: "Real-time applications",
+    desc: "WebSocket-driven chat, presence, live collaboration, and video conferencing — with the backpressure and reconnection logic that production needs.",
+    tags: ["WebSockets", "Pub/Sub", "Video"],
   },
   {
-    icon: <Mail size={24} />,
-    title: "Email System & SMTP Architecture",
-    description:
-      "Bulk email validation, SMTP server setup, transactional email systems, and deliverability optimization.",
-    gradient: "from-blue-600 to-indigo-600",
+    n: "06",
+    title: "Email & SMTP architecture",
+    desc: "Bulk validation, transactional pipelines, deliverability tuning. The dull, infrastructural work that quietly makes the rest of the product trustable.",
+    tags: ["SMTP", "Queues", "Deliverability"],
   },
 ];
 
@@ -59,63 +47,77 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-24 lg:py-32 relative overflow-hidden"
+      className="py-24 md:py-28 lg:py-32 border-t border-border"
     >
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-indigo-500/5 dark:bg-indigo-500/8 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block text-indigo-600 dark:text-indigo-400 font-semibold text-sm tracking-wider uppercase mb-3 bg-indigo-50 dark:bg-indigo-500/10 px-4 py-1.5 rounded-full border border-indigo-100 dark:border-indigo-500/20">
-            Services
-          </span>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mt-4">
-            What I Can Do{" "}
-            <span className="gradient-text">For You</span>
-          </h2>
-          <p className="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            From idea to deployment — comprehensive development services
-            tailored to your business needs.
+      <div className="max-w-6xl mx-auto px-6 lg:px-10">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 mb-16 lg:mb-20">
+          <div className="lg:col-span-5">
+            <p className="label-mono">04 — Services</p>
+            <h2 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.025em] leading-[1.05]">
+              How I can help.
+            </h2>
+          </div>
+          <p className="lg:col-span-7 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl lg:pt-3">
+            Engagements typically run from a few weeks for focused work to
+            multiple months for full product builds. I work either as the
+            lead developer or alongside an existing team.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, idx) => (
+        <div className="border-t border-border">
+          {services.map((s, i) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
+              key={s.n}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.08 }}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-indigo-500/10 transition-all duration-500 relative overflow-hidden"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: i * 0.04 }}
+              className="group border-b border-border"
             >
-              {/* Subtle gradient overlay on hover */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-[0.03] dark:group-hover:opacity-[0.06] transition-opacity duration-500`}
-              />
-
-              <div className="relative">
-                <div
-                  className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300`}
-                >
-                  {service.icon}
+              <div className="grid lg:grid-cols-12 gap-x-10 gap-y-4 py-8 lg:py-10">
+                <div className="lg:col-span-1 flex items-baseline gap-3 lg:block">
+                  <span className="font-mono text-[11px] text-muted tracking-wider">
+                    {s.n}
+                  </span>
                 </div>
-                <h3 className="text-base font-bold text-gray-900 dark:text-white mt-5 mb-2.5 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                  {service.description}
+                <div className="lg:col-span-4">
+                  <h3 className="text-xl md:text-2xl font-medium tracking-tight leading-snug">
+                    {s.title}
+                  </h3>
+                </div>
+                <p className="lg:col-span-5 text-sm md:text-base leading-relaxed text-foreground/75 max-w-xl">
+                  {s.desc}
                 </p>
+                <div className="lg:col-span-2 flex flex-wrap gap-x-3 gap-y-1.5 lg:justify-end items-start">
+                  {s.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="font-mono text-[10px] text-muted whitespace-nowrap"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-14 lg:mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-10">
+          <p className="text-base md:text-lg text-foreground/85 max-w-md leading-relaxed">
+            Working on something not listed here? Let&apos;s talk anyway —
+            most of the work I find interesting starts with an awkward fit.
+          </p>
+          <Link
+            href="#contact"
+            className="group inline-flex items-center gap-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            Start a conversation
+            <ArrowUpRight
+              size={15}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </Link>
         </div>
       </div>
     </section>

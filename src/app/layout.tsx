@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,10 +15,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://princemahmud.dev";
+
 export const metadata: Metadata = {
-  title: "Prince Mahmud — Full-Stack Developer",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Prince Mahmud — Full-Stack Developer",
+    template: "%s — Prince Mahmud",
+  },
   description:
-    "Full-Stack Developer specializing in React, Next.js, Node.js & System Architecture. Building scalable web applications, SaaS platforms, and real-time systems.",
+    "Full-stack developer building scalable web applications, SaaS platforms, and real-time systems with React, Next.js, and Node.js. Based in Bangladesh.",
   keywords: [
     "Prince Mahmud",
     "Full-Stack Developer",
@@ -25,6 +33,34 @@ export const metadata: Metadata = {
     "Node.js",
     "Web Developer Bangladesh",
   ],
+  authors: [{ name: "Prince Mahmud", url: siteUrl }],
+  creator: "Prince Mahmud",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "Prince Mahmud",
+    title: "Prince Mahmud — Full-Stack Developer",
+    description:
+      "Building durable web systems — SaaS, payments, real-time, and OTT infrastructure with React, Next.js, and Node.js.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prince Mahmud — Full-Stack Developer",
+    description:
+      "Building durable web systems — SaaS, payments, real-time, and OTT infrastructure with React, Next.js, and Node.js.",
+    creator: "@princevip1",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -32,13 +68,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeScript = `
+    (function(){try{
+      var t=localStorage.getItem('theme');
+      if(!t){t='dark';}
+      if(t==='dark'){document.documentElement.classList.add('dark');}
+    }catch(e){document.documentElement.classList.add('dark');}})();
+  `;
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#060b18] transition-colors duration-300`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground`}
       >
         <ThemeProvider>
-          {children}
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

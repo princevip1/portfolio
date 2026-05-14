@@ -1,57 +1,39 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MonitorSmartphone, Server, Wrench } from "lucide-react";
 
-const skillCategories = [
+const groups = [
   {
-    title: "Frontend",
-    icon: <MonitorSmartphone size={20} />,
-    gradient: "from-blue-600 to-indigo-600",
-    bg: "bg-indigo-50 dark:bg-indigo-500/10",
-    border: "border-indigo-100 dark:border-indigo-500/20",
-    badge: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-100 dark:border-indigo-500/20",
-    skills: [
-      "React.js",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "React Native (Expo)",
+    label: "Frontend",
+    items: [
+      { name: "TypeScript", since: "2021" },
+      { name: "React.js", since: "2020" },
+      { name: "Next.js", since: "2021" },
+      { name: "Tailwind CSS", since: "2021" },
+      { name: "React Native (Expo)", since: "2023" },
     ],
   },
   {
-    title: "Backend",
-    icon: <Server size={20} />,
-    gradient: "from-blue-600 to-indigo-600",
-    bg: "bg-indigo-50 dark:bg-indigo-500/10",
-    border: "border-indigo-100 dark:border-indigo-500/20",
-    badge: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-100 dark:border-indigo-500/20",
-    skills: [
-      "Node.js",
-      "Express.js",
-      "PHP",
-      "Laravel",
-      "MongoDB (Mongoose)",
-      "MySQL",
-      "PostgreSQL",
-      "REST API Development",
-      "GraphQL",
+    label: "Backend",
+    items: [
+      { name: "Node.js", since: "2019" },
+      { name: "Express.js", since: "2019" },
+      { name: "PostgreSQL", since: "2020" },
+      { name: "MongoDB / Mongoose", since: "2019" },
+      { name: "MySQL", since: "2018" },
+      { name: "REST · GraphQL", since: "2020" },
+      { name: "PHP · Laravel", since: "2018" },
     ],
   },
   {
-    title: "Other Tools",
-    icon: <Wrench size={20} />,
-    gradient: "from-blue-600 to-indigo-600",
-    bg: "bg-indigo-50 dark:bg-indigo-500/10",
-    border: "border-indigo-100 dark:border-indigo-500/20",
-    badge: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-100 dark:border-indigo-500/20",
-    skills: [
-      "Bull Queue",
-      "SMTP Email Systems",
-      "Payment Integration",
-      "System Architecture",
-      "Git & GitHub",
-      "Linux (CentOS)",
+    label: "Infrastructure",
+    items: [
+      { name: "Bull / Redis queues", since: "2021" },
+      { name: "SMTP & deliverability", since: "2021" },
+      { name: "Payment gateways", since: "2020" },
+      { name: "Linux (CentOS, Debian)", since: "2019" },
+      { name: "Git / GitHub Actions", since: "2019" },
+      { name: "System architecture", since: "—" },
     ],
   },
 ];
@@ -60,67 +42,59 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-24 lg:py-32 bg-gray-50/80 dark:bg-gray-950/50 relative overflow-hidden"
+      className="py-24 md:py-28 lg:py-32 border-t border-border bg-subtle/40"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/5 dark:bg-indigo-500/8 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block text-indigo-600 dark:text-indigo-400 font-semibold text-sm tracking-wider uppercase mb-3 bg-indigo-50 dark:bg-indigo-500/10 px-4 py-1.5 rounded-full border border-indigo-100 dark:border-indigo-500/20">
-            Technical Skills
-          </span>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mt-4">
-            Technologies I{" "}
-            <span className="gradient-text">Work With</span>
-          </h2>
-          <p className="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            A comprehensive toolkit spanning frontend frameworks, backend
-            systems, databases, and DevOps tools.
+      <div className="max-w-6xl mx-auto px-6 lg:px-10">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 mb-14 lg:mb-16">
+          <div className="lg:col-span-5">
+            <p className="label-mono">02 — Stack</p>
+            <h2 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.025em] leading-[1.05]">
+              Tools I reach for,
+              <br className="hidden md:block" /> and why.
+            </h2>
+          </div>
+          <p className="lg:col-span-7 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl lg:pt-3">
+            A short, deliberate stack picked over years of shipping. Nothing
+            here is fashionable for its own sake — each tool earns its place
+            by holding up in production, under load, with real users.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {skillCategories.map((category, idx) => (
+        <div className="grid md:grid-cols-3 border-t border-border">
+          {groups.map((g, gi) => (
             <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 40 }}
+              key={g.label}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-indigo-500/10 transition-shadow duration-500"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: gi * 0.08 }}
+              className={[
+                "py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0",
+                gi !== 0 ? "md:border-l border-border" : "",
+                gi !== 0 ? "border-t md:border-t-0" : "",
+              ].join(" ")}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div
-                  className={`w-10 h-10 bg-gradient-to-br ${category.gradient} rounded-xl flex items-center justify-center text-white text-lg shadow-lg`}
-                >
-                  {category.icon}
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                  {category.title}
+              <div className="flex items-baseline justify-between mb-6">
+                <h3 className="text-sm font-medium tracking-wide">
+                  {g.label}
                 </h3>
+                <span className="font-mono text-[10px] text-muted tracking-wider">
+                  {String(gi + 1).padStart(2, "0")}
+                </span>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, sIdx) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 + sIdx * 0.05 }}
-                    className={`${category.badge} px-3.5 py-1.5 rounded-lg text-sm font-medium border hover:scale-105 transition-transform duration-200 cursor-default`}
+              <ul>
+                {g.items.map((item) => (
+                  <li
+                    key={item.name}
+                    className="flex items-baseline justify-between py-3 border-b border-border/70 last:border-b-0"
                   >
-                    {skill}
-                  </motion.span>
+                    <span className="text-sm">{item.name}</span>
+                    <span className="font-mono text-[10px] text-muted tracking-wider">
+                      {item.since}
+                    </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
           ))}
         </div>

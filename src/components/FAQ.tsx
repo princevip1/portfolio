@@ -2,86 +2,89 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const faqs = [
   {
-    question: "What technologies do you specialize in?",
-    answer:
-      "I specialize in React.js, Next.js, TypeScript, Node.js, Express.js, PHP, Laravel, MongoDB, MySQL, and PostgreSQL. I also work with Tailwind CSS, GraphQL, WebSocket, and various payment integrations.",
+    q: "What technologies do you specialize in?",
+    a: "Primarily React, Next.js, and TypeScript on the frontend, with Node.js and Express on the backend. Postgres or MongoDB for data, depending on the shape of the problem. I also work in PHP/Laravel and React Native when projects call for it.",
   },
   {
-    question: "Do you work with clients internationally?",
-    answer:
-      "Yes! I'm based in Bangladesh and open to remote work globally. I've collaborated with clients across different time zones and always ensure clear communication and reliable delivery.",
+    q: "Do you work with clients internationally?",
+    a: "Yes — I work remotely with clients across time zones. I'm based in Dhaka (UTC+6) and adjust working hours to overlap meaningfully with US, EU, and APAC teams.",
   },
   {
-    question: "What types of projects do you build?",
-    answer:
-      "I build SaaS platforms, multivendor ecommerce systems, OTT streaming platforms, real-time applications, payment integration systems, bulk email validation tools, and custom APIs — essentially any complex web application.",
+    q: "What kinds of projects do you take on?",
+    a: "SaaS platforms, multivendor commerce, OTT streaming systems, payment infrastructure, real-time applications, and custom APIs. Anything where the interesting work is in the architecture, not just the surface.",
   },
   {
-    question: "How long does a typical project take?",
-    answer:
-      "It depends on the scope. A simple web app might take 2–4 weeks, while a full SaaS platform or ecommerce system could take 2–3 months. I'll provide a detailed timeline after understanding your requirements.",
+    q: "How long does a typical engagement run?",
+    a: "Two to four weeks for focused work or a clean MVP. Two to three months for a full SaaS or commerce build. I'll share a realistic timeline after we scope the work together — not before.",
   },
   {
-    question: "Do you offer ongoing maintenance and support?",
-    answer:
-      "Absolutely. I offer post-launch support including bug fixes, feature additions, performance optimization, and server maintenance. We can set up a monthly retainer or handle it on a per-request basis.",
+    q: "Do you offer ongoing maintenance and support?",
+    a: "Yes — bug fixes, feature work, performance tuning, server maintenance. Either as a monthly retainer or per-request, depending on what fits the rhythm of your team.",
   },
   {
-    question: "What is your development process?",
-    answer:
-      "I follow an agile approach: requirement gathering → architecture planning → iterative development with regular updates → testing → deployment. You'll have full visibility throughout the process with clean, well-documented code.",
+    q: "How do you work with clients day to day?",
+    a: "Agile in spirit, not ceremony. We agree on outcomes, I share progress on a regular cadence, and I'll tell you early when something looks like it's drifting. Code arrives clean, documented, and reviewable.",
   },
 ];
 
-function FAQItem({
+function Item({
   faq,
   isOpen,
   onToggle,
   index,
 }: {
-  faq: { question: string; answer: string };
+  faq: { q: string; a: string };
   isOpen: boolean;
   onToggle: () => void;
   index: number;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm"
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, delay: index * 0.04 }}
+      className="border-b border-border"
     >
       <button
+        type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-4 p-6 text-left cursor-pointer group"
+        className="w-full grid grid-cols-[28px_1fr_28px] items-start gap-4 py-6 lg:py-7 text-left cursor-pointer group"
+        aria-expanded={Boolean(isOpen)}
       >
-        <span className="font-semibold text-gray-900 dark:text-white text-sm lg:text-base group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-          {faq.question}
+        <span className="font-mono text-[11px] text-muted pt-1.5">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="text-base md:text-lg font-medium tracking-tight leading-snug pt-0.5 group-hover:text-foreground transition-colors">
+          {faq.q}
         </span>
         <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+          animate={{ rotate: isOpen ? 45 : 0 }}
+          transition={{ duration: 0.25 }}
+          className="text-muted pt-1 justify-self-end group-hover:text-foreground transition-colors"
         >
-          <ChevronDown size={16} />
+          <Plus size={18} strokeWidth={1.5} />
         </motion.span>
       </button>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-6 text-gray-500 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-50 dark:border-gray-800 pt-4">
-              {faq.answer}
+            <div className="grid grid-cols-[28px_1fr_28px] gap-4 pb-7">
+              <span />
+              <p className="text-sm md:text-base leading-relaxed text-foreground/75 max-w-2xl">
+                {faq.a}
+              </p>
+              <span />
             </div>
           </motion.div>
         )}
@@ -96,34 +99,26 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="py-24 lg:py-32 bg-gray-50/80 dark:bg-gray-950/50 relative overflow-hidden"
+      className="py-24 md:py-28 lg:py-32 border-t border-border bg-subtle/40"
     >
-      {/* Background decoration */}
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/5 dark:bg-indigo-500/8 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3" />
-
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block text-indigo-600 dark:text-indigo-400 font-semibold text-sm tracking-wider uppercase mb-3 bg-indigo-50 dark:bg-indigo-500/10 px-4 py-1.5 rounded-full border border-indigo-100 dark:border-indigo-500/20">
-            FAQ
-          </span>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mt-4">
-            Frequently Asked{" "}
-            <span className="gradient-text">Questions</span>
-          </h2>
-          <p className="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Common questions about my work, process, and availability.
+      <div className="max-w-6xl mx-auto px-6 lg:px-10">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 mb-12 lg:mb-14">
+          <div className="lg:col-span-5">
+            <p className="label-mono">05 — FAQ</p>
+            <h2 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.025em] leading-[1.05]">
+              Questions, answered
+              <br className="hidden md:block" /> the short way.
+            </h2>
+          </div>
+          <p className="lg:col-span-7 text-base md:text-lg leading-relaxed text-foreground/80 max-w-2xl lg:pt-3">
+            The things people usually ask before getting in touch. If yours
+            isn&apos;t here, drop me a line — I read every message.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="space-y-3">
+        <div className="border-t border-border">
           {faqs.map((faq, idx) => (
-            <FAQItem
+            <Item
               key={idx}
               faq={faq}
               index={idx}
