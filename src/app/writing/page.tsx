@@ -1,60 +1,14 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";
+import { posts } from "@/lib/writing";
 
 export const metadata: Metadata = {
   title: "Writing",
   description:
     "Notes on building production web systems — payments, real-time, multi-tenant, and the messier parts of full-stack work.",
 };
-
-const posts: {
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  topic: string;
-}[] = [
-  {
-    title: "Designing webhooks that actually arrive",
-    excerpt:
-      "Notes from a year of payment integrations: idempotency keys you can trust, retries that don't lie, and the dead-letter queue that pays for itself.",
-    date: "Mar 12, 2026",
-    readTime: "9 min",
-    topic: "Payments",
-  },
-  {
-    title: "Why I still pick Express over the new defaults",
-    excerpt:
-      "The unfashionable case for boring middleware. What Express buys you over Fastify, Hono, and Elysia once a project crosses a couple of years.",
-    date: "Feb 04, 2026",
-    readTime: "7 min",
-    topic: "Backend",
-  },
-  {
-    title: "The reconnect handshake nobody writes about",
-    excerpt:
-      "Building WebSocket clients that survive flaky networks — exponential backoff, server-side jitter, slow-start handshakes, and other things you wish you'd added on day one.",
-    date: "Dec 18, 2025",
-    readTime: "11 min",
-    topic: "Real-time",
-  },
-  {
-    title: "Multi-tenant Postgres without the regrets",
-    excerpt:
-      "Row-level security, schema-per-tenant, or separate databases — when each model breaks, and the migration plan you wish you'd have at the start.",
-    date: "Oct 27, 2025",
-    readTime: "13 min",
-    topic: "Data",
-  },
-  {
-    title: "Notes on shipping under a name you respect",
-    excerpt:
-      "On freelancing, scope creep, when to say no, and the practical art of telling a client their idea isn't quite the right one.",
-    date: "Aug 09, 2025",
-    readTime: "6 min",
-    topic: "Career",
-  },
-];
 
 export default function WritingPage() {
   return (
@@ -77,9 +31,10 @@ export default function WritingPage() {
 
         <div className="border-t border-border">
           {posts.map((post, i) => (
-            <article
-              key={post.title}
-              className="group grid lg:grid-cols-12 gap-6 lg:gap-10 border-b border-border py-10 lg:py-12"
+            <Link
+              key={post.slug}
+              href={`/writing/${post.slug}`}
+              className="group grid lg:grid-cols-12 gap-6 lg:gap-10 border-b border-border py-10 lg:py-12 -mx-4 px-4 lg:-mx-6 lg:px-6 hover:bg-foreground/2 rounded-sm transition-colors"
             >
               <div className="lg:col-span-2">
                 <p className="font-mono text-[11px] uppercase tracking-wider text-muted">
@@ -104,8 +59,13 @@ export default function WritingPage() {
                 <span className="font-mono text-[11px] uppercase tracking-wider text-muted">
                   {post.readTime} read
                 </span>
+                <ArrowUpRight
+                  size={16}
+                  strokeWidth={1.5}
+                  className="hidden lg:block text-muted group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all mt-1"
+                />
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
